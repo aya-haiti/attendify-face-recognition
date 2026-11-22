@@ -138,3 +138,16 @@ ATTENDIFY/
 │
 └── attendance.csv
     Attendance export file
+
+
+## Download & setup
+
+Each [GitHub Release](https://github.com/aya-haiti/attendify-face-recognition/releases/latest) contains
+`Attendify-source.zip` (built by `.github/workflows/release.yml` on `v*` tags). The application needs a
+webcam and a local MySQL server, so it is not shipped as a single executable.
+
+```bash
+pip install -r requirements.txt        # Python 3.10–3.12
+# create the MySQL database "face_recognition_system" (XAMPP: root@localhost)
+python main.py
+```

@@ -1,0 +1,49 @@
+name: Check & Release (source package)
+
+# The app needs a webcam, a local MySQL database and native libraries (OpenCV, optionally dlib),
+# so it is distributed as a source package with setup instructions rather than a single .exe.
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Syntax check and core imports
+        run: |
+          python -m compileall -q .
+          python -c "import cv2, numpy, PIL, mysql.connector; assert hasattr(cv2, 'face'); print('ok')"
+      - name: Package source
+        shell: pwsh
+        run: git archive --format=zip --prefix=attendify/ -o Attendify-source.zip HEAD
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Attendify-source
+          path: Attendify-source.zip
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: Attendify-source
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: Attendify-source.zip
+          generate_release_notes: true

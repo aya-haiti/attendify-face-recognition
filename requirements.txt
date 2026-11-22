@@ -1,0 +1,9 @@
+# Core (attendance, training, student management)
+opencv-contrib-python>=4.8   # provides cv2.face (LBPH recognizer)
+numpy>=1.24
+Pillow>=10.0
+mysql-connector-python>=8.2
+# Optional: dlib-based recognizer (dlib_face_recognition.py) — needs a C++ build toolchain on Windows
+# dlib>=19.24
+# Optional: local assistant (chatbot.py) — requires a running Ollama server
+# ollama>=0.3
