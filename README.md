@@ -151,3 +151,20 @@ pip install -r requirements.txt        # Python 3.10–3.12
 # create the MySQL database "face_recognition_system" (XAMPP: root@localhost)
 python main.py
 ```
+
+
+## Web version (`web/`)
+
+A browser version of Attendify lives in `web/` (the desktop application above is unchanged):
+dashboard, students, courses & sessions, manual roll call, attendance history with CSV export
+(same columns as the desktop export), reports, search and filters.
+
+- **Demo data:** fictitious students and sessions, stored only in the visitor's browser.
+- **Face recognition:** same method as `dlib_face_recognition.py` (128-d descriptor, Euclidean distance,
+  tolerance 0.6, confidence = (1 − distance) × 100), computed **on the visitor's device** with face-api.js.
+  Requires explicit consent; only numeric descriptors are kept (in the tab, or on the device if the user
+  chooses), never images; a button deletes them. No real student photos or biometric data are published.
+- **Limits:** the original LBPH/dlib model files and trained data are not reused (they would contain real
+  faces); recognition only works for faces enrolled by the visitor in their own browser.
+
+Hosting: static site on Vercel (`vercel.json`, output directory `web/`).

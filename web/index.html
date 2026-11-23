@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attendify · Attendance</title>
+<meta name="description" content="Version web d'Attendify : gestion des présences (étudiants, cours, séances, historique, rapports) avec reconnaissance faciale exécutée localement dans le navigateur, sur consentement.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="logo"><span>A</span>Attendify</div>
+    <nav aria-label="Navigation principale">
+      <a href="#/dashboard" data-route="dashboard">📊 <b>Tableau de bord</b></a>
+      <a href="#/sessions" data-route="sessions">🗓️ <b>Séances</b></a>
+      <a href="#/students" data-route="students">👥 <b>Étudiants</b></a>
+      <a href="#/history" data-route="history">🧾 <b>Historique</b></a>
+      <a href="#/reports" data-route="reports">📈 <b>Rapports</b></a>
+      <a href="#/face" data-route="face">🙂 <b>Reconnaissance</b></a>
+    </nav>
+    <div class="side-foot">
+      <span class="demo-pill">Données fictives</span>
+      <button class="link" id="reset">Réinitialiser la démo</button>
+      <a href="https://github.com/aya-haiti/attendify-face-recognition" target="_blank" rel="noopener">Code source ↗</a>
+    </div>
+  </aside>
+  <main id="view" tabindex="-1"></main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog id="dlg"><form method="dialog" id="dlg-form"></form></dialog>
+<script src="app.js"></script>
+</body>
+</html>
